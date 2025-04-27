@@ -1,18 +1,24 @@
-name: Creating dependent jobs
-on:
-  workflow_dispatch:
+name: Dependent Jobs Example
+
+on: [push]
+
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - run: ./setup_server.sh
   build:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
-      - run: ./build_server.sh
+      - name: Build step
+        run: echo "Running build..."
+
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - run: ./test_server.sh
+      - name: Test step
+        run: echo "Running tests..."
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy step
+        run: echo "Deploying application..."
