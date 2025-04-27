@@ -1,0 +1,13 @@
+name: Workflow trigger Hello on Schedule
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Every day at 00:00 UTC
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo "⏰ Hello! This workflow ran on a schedule."
